@@ -24,23 +24,7 @@ This example app shows how to integrate the ABBYY Real-Time Recognition SDK Cord
     * Copy the Android library (`abbyy-rtr-sdk-1.0.aar`) to `libs/android`.
     * Copy the iOS framework (`AbbyyRtrSDK.framework`) to `libs/ios`.
     These paths already exist in the example project.
-6. Add `libs/android` and `libs/ios` to the linker search paths.
-    * For Android, add the following settings to `platforms/android/build.gradle`:
-        ```gradle
-        allprojects {
-          repositories {
-            flatDir {
-              dirs '../../../libs/android' // cordova-android >= 7
-              dirs '../../libs/android' // cordova-android <= 6
-            }
-          }
-        }
-        ```
-    * For iOS, add the following to `platforms/ios/cordova/build.xcconfig`:
-        ```xcode
-        FRAMEWORK_SEARCH_PATHS = "../../libs/ios"
-        ```
-7. Connect a device via USB, build and run.
+6. Connect a device via USB, build and run.
     * Android:
         ```sh
         cordova build android

@@ -22,23 +22,7 @@ The native libraries support the following systems:
     * Copy RTR SDK assets (patterns and dictionaries) and license file (`AbbyyRtrSdk.license`) to `www/rtr_assets`.
     * Copy the Android library (`abbyy-rtr-sdk-1.0.aar`) to `libs/android`.
     * Copy the iOS framework (`AbbyyRtrSDK.framework`) to `libs/ios`.
-3. Add `libs/android` and `libs/ios` to the linker search paths.
-    * For Android, add the following settings to `platforms/android/build.gradle`:
-        ```gradle
-        allprojects {
-          repositories {
-            flatDir {
-              dirs '../../../libs/android' // cordova-android >= 7
-              dirs '../../libs/android' // cordova-android <= 6
-            }
-          }
-        }
-        ```
-    * For iOS, add the following to `platforms/ios/cordova/build.xcconfig`:
-        ```xcode
-        FRAMEWORK_SEARCH_PATHS = "../../libs/ios"
-        ```
-4. To build and run your project:
+3. To build and run your project:
     * For Android:
         ```sh
         cordova build android

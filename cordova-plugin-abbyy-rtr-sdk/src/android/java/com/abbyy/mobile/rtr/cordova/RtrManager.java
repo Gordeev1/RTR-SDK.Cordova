@@ -1,6 +1,5 @@
 package com.abbyy.mobile.rtr.cordova;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.abbyy.mobile.rtr.Engine;

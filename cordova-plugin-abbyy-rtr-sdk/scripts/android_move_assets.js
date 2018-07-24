@@ -5,7 +5,7 @@
 // Alseo we need to rename folders to lowercase.
 
 module.exports = function (ctx) {
-	if (ctx.opts.platforms.indexOf('android') < 0) {
+	if (ctx.opts.platforms && ctx.opts.platforms.indexOf('android') < 0) {
 		return;
 	}
 
@@ -31,7 +31,7 @@ module.exports = function (ctx) {
 
 		rimraf.sync(path.join(dst, '!(www)*'));
 
-		fs.readdirSync(src).forEach(function (file, index) {
+		return fs.readdirSync(src).forEach(function (file, index) {
 			if (fs.lstatSync(path.join(src, file)).isDirectory()) {
 				fs.rename(path.join(src, file), path.join(dst, file.toLowerCase()), callback);
 			} else {

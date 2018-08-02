@@ -10,6 +10,7 @@
 /// Selected data capture scenario.
 @property (nonatomic) RTRDataCaptureScenario* selectedScenario;
 @property (nonatomic, strong) NSString* profile;
+@property (nonatomic, strong) RTRDataCaptureViewController* selfProperty;
 
 @property (nonatomic, strong) RTRDataScheme* dataScheme;
 @property (nonatomic, strong) NSArray<RTRDataField*>* dataFields;

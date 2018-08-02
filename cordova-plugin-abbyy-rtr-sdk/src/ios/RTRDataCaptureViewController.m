@@ -14,6 +14,8 @@
 {
 	[super viewDidLoad];
 	
+	self.selfProperty = self;
+	
 	self.settingsButton.userInteractionEnabled = NO;
 	self.settingsButton.hidden = NO;
 

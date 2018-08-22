@@ -45,7 +45,7 @@ abstract class BaseActivity extends Activity {
 	protected static final int cameraZoom = 1;
 	// The default behavior in this sample is to start recognition when application is started or
 	// resumed. You can turn off this behavior or remove it completely to simplify the application
-	protected static final boolean startRecognitionOnAppStart = true;
+	protected static final boolean startRecognitionOnAppStart = false;
 	// Area of interest specified through margin sizes relative to camera preview size
 	protected static int areaOfInterestMargin_PercentOfWidth = 4;
 	protected static int areaOfInterestMargin_PercentOfHeight = 15;
@@ -80,9 +80,9 @@ abstract class BaseActivity extends Activity {
 	protected TextView errorTextView; // Show errors from recognizer
 
 	// Text displayed on start button
-	protected static final String BUTTON_TEXT_START = "Start";
-	protected static final String BUTTON_TEXT_STOP = "Stop";
-	protected static final String BUTTON_TEXT_STARTING = "Starting...";
+	protected static final String BUTTON_TEXT_START = "Старт";
+	protected static final String BUTTON_TEXT_STOP = "Стоп";
+	protected static final String BUTTON_TEXT_STARTING = "Запускаю...";
 
 	//private IRecognitionService captureService;
 

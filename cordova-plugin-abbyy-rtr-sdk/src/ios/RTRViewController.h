@@ -46,6 +46,8 @@ extern void performBlockOnMainThread(NSInteger delay, void(^block)());
 @property (nonatomic, weak) IBOutlet UIView* previewView;
 /// Stop/Start capture button
 @property (nonatomic, weak) IBOutlet UIButton* captureButton;
+/// Rectangle view
+@property (nonatomic) UIView *rectView;
 
 /// View for displaying current area of interest.
 @property (nonatomic, weak) IBOutlet RTRSelectedAreaView* overlayView;

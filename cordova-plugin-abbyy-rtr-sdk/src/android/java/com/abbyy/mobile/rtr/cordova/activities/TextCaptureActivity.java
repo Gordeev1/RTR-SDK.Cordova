@@ -187,14 +187,14 @@ public class TextCaptureActivity extends BaseActivity {
 	@Override
 	public void onStartButtonClick( View view )
 	{
-		if( startButton.getText().equals( BUTTON_TEXT_STOP ) ) {
+		if( startButton.getText().equals( getString(getResources().getIdentifier("stop_text", "string", getPackageName())) ) ) {
 			stopRecognition();
 			dispatchResults( currentLines, currentStabilityStatus, true );
 		} else {
 			errorOccurred = null;
 			clearRecognitionResults();
 			startButton.setEnabled( false );
-			startButton.setText( BUTTON_TEXT_STARTING );
+			startButton.setText( getString(getResources().getIdentifier("starting_text", "string", getPackageName())) );
 			if( !isContinuousVideoFocusModeEnabled( camera ) ) {
 				autoFocus( startRecognitionCameraAutoFocusCallback );
 			} else {

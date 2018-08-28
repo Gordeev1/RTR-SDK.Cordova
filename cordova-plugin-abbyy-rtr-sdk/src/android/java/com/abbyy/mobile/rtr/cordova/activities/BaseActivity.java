@@ -45,7 +45,7 @@ abstract class BaseActivity extends Activity {
 	protected static final int cameraZoom = 1;
 	// The default behavior in this sample is to start recognition when application is started or
 	// resumed. You can turn off this behavior or remove it completely to simplify the application
-	protected static final boolean startRecognitionOnAppStart = true;
+	protected static final boolean startRecognitionOnAppStart = false;
 	// Area of interest specified through margin sizes relative to camera preview size
 	protected static int areaOfInterestMargin_PercentOfWidth = 4;
 	protected static int areaOfInterestMargin_PercentOfHeight = 15;
@@ -78,11 +78,6 @@ abstract class BaseActivity extends Activity {
 	protected ImageButton flashButton;
 	protected TextView warningTextView; // Show warnings from recognizer
 	protected TextView errorTextView; // Show errors from recognizer
-
-	// Text displayed on start button
-	protected static final String BUTTON_TEXT_START = "Start";
-	protected static final String BUTTON_TEXT_STOP = "Stop";
-	protected static final String BUTTON_TEXT_STARTING = "Starting...";
 
 	//private IRecognitionService captureService;
 
@@ -353,7 +348,7 @@ abstract class BaseActivity extends Activity {
 		{
 			cameraInitialisation = false;
 			onAutoFocusFinished( success, camera );
-			startButton.setText( BUTTON_TEXT_START );
+			startButton.setText( getString(getResources().getIdentifier("start_text", "string", getPackageName())) );
 			startButton.setEnabled( true );
 			if( startRecognitionWhenReady ) {
 				startRecognition();
@@ -404,7 +399,7 @@ abstract class BaseActivity extends Activity {
 		public void onClick( View v )
 		{
 			// if BUTTON_TEXT_STARTING autofocus is already in progress, it is incorrect to interrupt it
-			if( !startButton.getText().equals( BUTTON_TEXT_STARTING ) ) {
+			if( !startButton.getText().equals( getString(getResources().getIdentifier("starting_text", "string", getPackageName())) ) ) {
 				autoFocus( simpleCameraAutoFocusCallback );
 			}
 		}
@@ -455,7 +450,7 @@ abstract class BaseActivity extends Activity {
 					previewSurfaceHolder.setKeepScreenOn( false );
 				}
 				// Change the text on the stop button back to 'Start'
-				startButton.setText( BUTTON_TEXT_START );
+				startButton.setText( getString(getResources().getIdentifier("start_text", "string", getPackageName())) );
 				startButton.setEnabled( true );
 			}
 		}.execute();
@@ -470,7 +465,7 @@ abstract class BaseActivity extends Activity {
 		// Start the service
 		getCaptureService().start( cameraPreviewSize.width, cameraPreviewSize.height, orientation, areaOfInterest );
 		// Change the text on the start button to 'Stop'
-		startButton.setText( BUTTON_TEXT_STOP );
+		startButton.setText( getString(getResources().getIdentifier("stop_text", "string", getPackageName())) );
 		startButton.setEnabled( true );
 	}
 
@@ -647,7 +642,7 @@ abstract class BaseActivity extends Activity {
 		if( getCaptureService() != null ) {
 			getCaptureService().stop();
 		}
-		startButton.setText( BUTTON_TEXT_START );
+		startButton.setText( getString(getResources().getIdentifier("start_text", "string", getPackageName())) );
 		// Clear recognition results
 		clearRecognitionResults();
 		stopPreviewAndReleaseCamera();

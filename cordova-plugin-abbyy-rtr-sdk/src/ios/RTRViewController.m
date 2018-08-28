@@ -44,12 +44,27 @@ void performBlockOnMainThread(NSInteger delay, void(^block)())
 	return [self initWithNibName:NSStringFromClass([RTRViewController class]) bundle:NSBundle.mainBundle];
 }
 
+- (CGRect)createRectangle {
+    int heightOffset = 70;
+    int widthOffset = 40;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    return CGRectMake(widthOffset, heightOffset, screenWidth - 2 * widthOffset, screenHeight - 2 * heightOffset);
+}
+
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
 	// Recommended session preset.
 	_sessionPreset = AVCaptureSessionPreset1280x720;
 	_imageBufferSize = CGSizeMake(720.f, 1280.f);
+	
+	self.rectView = [[UIView alloc] initWithFrame:self.createRectangle];
+	// self.rectView.layer.cornerRadius = 30;
+	self.rectView.backgroundColor = [UIColor clearColor];
+	self.rectView.layer.borderColor = [[UIColor whiteColor] CGColor];
+	self.rectView.layer.borderWidth = 2.0;
 
 	[self.settingsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:RTRTableCellID];
 	self.settingsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -58,6 +73,9 @@ void performBlockOnMainThread(NSInteger delay, void(^block)())
 
 	self.captureButton.hidden = !self.isStopButtonVisible;
 	self.captureButton.selected = NO;
+	self.captureButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+    self.captureButton.layer.cornerRadius = 15;
+	self.captureButton.titleLabel.adjustsFontSizeToFitWidth = YES;
 
 	self.flashButton.hidden = !self.isFlashlightVisible;
 	if(!self.isFlashlightVisible && !self.isLanguageSelectionEnabled) {
@@ -74,6 +92,8 @@ void performBlockOnMainThread(NSInteger delay, void(^block)())
 	}];
 
 	_currentStabilityStatus = RTRResultStabilityNotReady;
+	
+    [[self view] addSubview:[self rectView]];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -85,8 +105,10 @@ void performBlockOnMainThread(NSInteger delay, void(^block)())
 	[self.service stopTasks];
 	[self clearScreenFromRegions];
 
-	[coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
-	{
+	[coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        self.rectView.frame = [self createRectangle];
+        // self.rectView.layer.cornerRadius = 30;
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
 		_imageBufferSize = CGSizeMake(MIN(_imageBufferSize.width, _imageBufferSize.height),
 			MAX(_imageBufferSize.width, _imageBufferSize.height));
 		if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
@@ -139,7 +161,7 @@ void performBlockOnMainThread(NSInteger delay, void(^block)())
 	[self configureAVCaptureSession];
 	[self configurePreviewLayer];
 	[_session startRunning];
-	[self capturePressed];
+
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(avSessionFailed:)
 		name: AVCaptureSessionRuntimeErrorNotification object:nil];

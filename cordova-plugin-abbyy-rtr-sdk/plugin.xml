@@ -7,6 +7,10 @@
 	<js-module src="www/AbbyyRtrSdk.js" name="AbbyyRtrSdk">
 		<clobbers target="AbbyyRtrSdk" />
 	</js-module>
+	
+	<preference name="START_TEXT" default="Start" />
+	<preference name="STOP_TEXT" default="Stop" />
+	<preference name="STARTING_TEXT" default="Starting..." />
 
 	<!-- Android -->
 	<platform name="android">
@@ -52,6 +56,12 @@ To get started:
 				android:name="com.abbyy.mobile.rtr.cordova.settings.LanguagesSettingActivity"
 			/>
 
+		</config-file>
+		
+		<config-file target="res/values/strings.xml" parent="/*">
+			<string name="start_text">$START_TEXT</string>
+			<string name="stop_text">$STOP_TEXT</string>
+			<string name="starting_text">$STARTING_TEXT</string>
 		</config-file>
 
 		<!-- plugin source code -->
@@ -118,6 +128,18 @@ To get started:
 			<feature name="AbbyyRtrSdk">
 				<param name="ios-package" value="RTRPlugin"/>
 			</feature>
+		</config-file>
+		
+		<config-file target="*-Info.plist" parent="NSStartText">
+	 		<string>$START_TEXT</string>
+ 		</config-file>
+		
+		<config-file target="*-Info.plist" parent="NSStopText">
+			<string>$STOP_TEXT</string>
+		</config-file>
+		
+		<config-file target="*-Info.plist" parent="NSStartingText">
+			<string>$STARTING_TEXT</string>
 		</config-file>
 
 		<header-file src="src/ios/RTRPlugin.h" />

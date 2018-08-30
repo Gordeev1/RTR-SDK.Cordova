@@ -76,6 +76,10 @@ void performBlockOnMainThread(NSInteger delay, void(^block)())
 	self.captureButton.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
     self.captureButton.layer.cornerRadius = 15;
 	self.captureButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    [[self captureButton] setTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSStartText"] forState:UIControlStateNormal];
+    
+    [[self captureButton] setTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSStopText"] forState:UIControlStateSelected];
 
 	self.flashButton.hidden = !self.isFlashlightVisible;
 	if(!self.isFlashlightVisible && !self.isLanguageSelectionEnabled) {
